@@ -1,0 +1,174 @@
+
+==================================================
+①トップ画面
+ALL for MUSCLE
+クリックで画面遷移or3秒後
+==================================================
+
+②カウンセリング
+Q１トレーニングのめあて
+⓪目標値の設定をする カウンセリング
+どんな自分になりたいか
+いつまでに実現したいか
+
+Q１その理由
+Q１トレーニングの頻度一週間に何回
+
+
+Q１
+Q１
+Q１
+Q１
+Q１
+カウンセリングが未完了なら、カウンセリング画面
+カウンセリングが完了していたら、そのままトレーニング画面
+-----------------------------------------------
+================================================
+1自分に適したメニューを提示してくれる！
+①筋力（デフォルト）、筋肥大、持久力
+
+②自分に適したメニューの設定
+1セットの回数
+セット数　
+インターバル時間1~3分
+
+休息何日やるか。48 72時間後目安
+
+②有酸素運動
+タイマーか、手入力
+自転車、ランニング、ウォーキング、
+
+2メニュー構成を相談する！
+今週は何回行く？日曜日に聞く！
+週に何回行く予定？
+どこを鍛えたいか鍛えるべきか。目標の姿によるところもあるのでは、、、
+
+メニュー選択　
+胸　ベンチ　max100キロ　バーベル
+背中　デッドリフト　120キロ　バーベル
+腕　15キロ　ダンベル
+腹筋　
+足　スクワット　120キロ
+
+バーベルスクワット: 大腿四頭筋、ハムストリングス、臀部を鍛える効果があります。
+ベンチプレス: 胸筋、三角筋、上腕二頭筋を鍛える効果があります。
+デッドリフト: 大腿四頭筋、ハムストリングス、背中の広筋、僧帽筋を鍛える効果があります。
+チンニング（懸垂）: 背中の広筋、上腕二頭筋、上腕筋、僧帽筋を鍛える効果があります。
+ダンベルショルダープレス: 肩の三角筋を鍛える効果があります。
+ラットプルダウン: 背中の広筋、上腕二頭筋、上腕筋、僧帽筋を鍛える効果があります。
+ランジ: 大腿四頭筋、ハムストリングス、臀部を鍛える効果があります。
+プランク: 腹筋、背中の筋肉、脚の筋肉を鍛える効果があります。
+クランチ: 腹筋を鍛える効果があります。
+プッシュアップ: 胸筋、三角筋、上腕二頭筋を鍛える効果があります。
+
+
+3履歴による判断　
+今日はまるまるをやろう
+今日はお休み　筋肉を回復
+筋肉の声を聞こうよ。
+
+
+4モチベーション
+色の変化　ナイキアプリの真似
+ふりかえりページ　日記的なやつ
+達成率表示　　勉強アプリの真似
+
+
+5トレーニングの記録
+トレーニング中の記録
+何を　何キロで　何回　何セット　
+インターバルを何分
+タイマー起動と声かけ
+
+
+6SNSへの投稿
+
+
+
+$("#set_finish_btn").on("click", function () {
+const title = $("#training_menu1_title").val();
+const kg = $("#training_menu1_kg_count").val();
+const rep = $("#training_menu1_rep_count").val();
+const set = $("#training_menu1_set_count").val();
+
+const data = {
+title : title,
+kg : kg,
+rep : rep,
+set : set,
+};
+console.log(data);
+
+});
+
+console.log(data);を確認すると、''と表示される。
+
+<input type="text" list="training_menu1_name" placeholder="胸筋">
+<datalist id="training_menu1_title"></datalist>
+
+htmはこのように書いているが、訂正があるか
+
+// localStorage.setItem("memo", text);
+
+
+
+
+
+
+
+<div class=training_menu id="training_menu1">
+    <!-- トレーニングの種目の記録 -->
+    <input type="text" list="training_menu_name" " placeholder=" 種目">
+    <datalist class="training_menu_name" id="training_menu_name"></datalist>
+
+
+    <!-- トレーニングのセット数の記録 -->
+    <input type="text" list="training_menu_set_count" " placeholder=" 1セット">
+    <datalist class="training_menu_set_count" id="training_menu_set_count" value=""></datalist>
+
+
+
+    <!-- トレーニングの負荷の重さ -->
+    <input type="text" list="training_menu_kg_count" placeholder="50kg">
+    <datalist class="training_menu_kg_count" id="training_menu_kg_count"></datalist>
+
+    <!-- トレーニングの１セットあたりの回数 -->
+    <input type="text" list="training_menu_rep_count" placeholder="10rep">
+    <datalist class="training_menu_rep_count" id="training_menu_rep_count"></datalist>
+
+</div>
+<div>
+    <button id="log_btn">記録する</button>
+    <button id="finish_btn">セット終了</button>
+
+</div>
+</div>
+
+
+jqueryが
+
+$("#log_btn").on("click", function () {
+
+const name = $("#training_menu_name").val();
+const set = $("#training_menu_set").val();
+const kg = $("#training_menu_kg_count").val();
+const rep = $("#training_menu_rep_count").val();
+
+const data = {
+name: name,
+set: set,
+kg : kg,
+rep : rep,
+};
+
+$("#text" ).text((data.name) + (data.set) + (data.kg) + (data.rep));
+
+const json = JSON.stringify(data);//JSONで互換性を設定
+
+console.log(json);
+localStorage.setItem("log1" , json);
+
+console.log(json);
+
+
+index.js:116 {"name":"","set":"","kg":"","rep":""}ってコンソールで表示されるけどどうして？

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>ALL for MUSCLE</title>
+</head>
+<body>
+
+<main>
+<!-- =================================================
+タイトル画面
+=====================================================-->
+<div class="top"  id="">
+   <h1>ALL for MUSCLE</h1>
+   <h3>~すべては筋力トレーニングのために〜</h3>
+</div>
+
+<div class="wrapper">
+    <ul class="tab">
+        <li><a href="#home">home</a></li>
+        <li><a href="#training">training</a></li>
+        <li><a href="#diary">diary</a></li>
+        <li><a href="#tool">tool</a></li>
+        <li><a href="#link">link</a></li>
+    </ul>
+<!-- ==============================================
+カウンセリング画面
+==================================================== -->
+    <div id="home" class="area">
+        <div class="tool_in">
+            <div>
+                <p>トレーニングのめあて</p>
+                <textarea name="" id="goal_text" cols="30" rows="1"></textarea>
+                <button id="goal_text_save_btn">決定</button>
+            </div>
+
+            <div>
+                <p>週に何回ジムでトレーニングに行く？</p>
+                <textarea name="" id="count_week_gym_text" cols="5" rows="1" value=""></textarea>
+                <select name="" id="count_week_gym_list" value="">
+                </select>
+
+                <button id="count_week_gym_save_btn">決定</button>
+                <button id="count_week_gym_change_btn">変更</button>
+            </div>
+
+            <div>
+                <p>特にどこを鍛えたい？</p>
+                <textarea name="" id="training_main_menu_text" cols="30" rows="1"></textarea>
+                <button id="training_main_menu_save_btn">決定</button>
+            </div>
+        <!-- inner_area -->
+        </div>
+    </div>
+
+
+<!-- ===========================================
+トレーニングの記録　
+================================================ -->
+    <div id="training" class="area">
+        <div class="inner_area">
+            <p>======トレーニングの記録========</p>
+            <div>
+                <input id="date" type="date" list="date">
+                のトレーニング
+                <button id="date_input_btn">始めるよ</button>
+            </div>
+        <!-- ------------------------------------------
+        トレーニンングの記録画面＿＿何を何回行ったか
+        -------------------------------------------------->
+            <section class="record" id="record1">
+       
+                <p>===トレーニングメニューを記録していこう===</p>
+                <div class="training">
+                    <div class="training_menu" id="training_menu1">
+                    <!-- トレーニングの種目の記録 -->
+        
+                    <input type="text" id="input_menu_name" list="training_menu_name" placeholder="種目">
+                    <datalist class="training_menu_name" id="training_menu_name"></datalist>
+        
+                    <!-- トレーニングのセット数の記録 -->
+                    <!-- <input type="text" id="input_menu_set_count" list="training_menu_set_count" placeholder="1セット"> -->
+                    <select class="training_menu_set_count" id="training_menu_set_count"></select>
+        
+                    <!-- トレーニングの負荷の重さ -->
+                    <input type="text" id="input_menu_kg_count" list="training_menu_kg_count" placeholder="50kg">
+                    <datalist class="training_menu_kg_count" id="training_menu_kg_count" value=""></datalist>
+        
+                    <!-- トレーニングの１セットあたりの回数 -->
+                    <input type="text" id="input_menu_rep_count" list="training_menu_rep_count" placeholder="10rep">
+                    <datalist class="training_menu_rep_count" id="training_menu_rep_count" value=""></datalist>
+                <!-- class="training"> -->
+                </div>
+
+                <div>
+                    <button id="log_btn">記録する</button>
+                    <button id="finish_btn">トレーニング終了</button>
+                </div>
+
+            <!-- class="record" id="record1" -->
+            </section>
+        
+                <div id="input_text">
+                    <p id="input_date"></p>
+                </div>
+        <!-- <div class="tool_in">-->
+        </div>
+    <!-- id="training" class="area" -->
+    </div>
+
+
+    
+<!-- ============================================================== -->
+<!-- トレーニンングの日誌 -->
+<!-- ============================================================== -->
+    <div id="diary" class="area">
+        <!-- モーダル機能で記録する場所 -->
+        <div class="wrapper1">
+            <!-- tabタブの設定  -->
+            <ul class="tab1">
+                <li><a href="#Monday">月</a></li>
+                <li><a href="#Tuesday">火</a></li>
+                <li><a href="#Wednesday">水</a></li>
+                <li><a href="#Thursday">木</a></li>
+                <li><a href="#Friday">金</a></li>
+                <li><a href="#Saturday">土</a></li>
+                <li><a href="#Sunday">日</a></li>
+            </ul>
+
+            <div id="Monday" class="area1">
+                <textarea name="" id="training_diary_Monday" cols="50" rows="10">
+                </textarea>
+                <button id="training_diary_Monday_save_btn">保存</button>
+                <button id="training_diary_Monday_clear_btn">消す</button>
+                <!--/area-->
+            </div>
+
+            <div id="Tuesday" class="area1">
+                <textarea name="" id="training_diary_Tuesday" cols="50" rows="10">
+                    </textarea>
+                <button id="training_diary_Tuesday_save_btn">保存</button>
+                <button id="training_diary_Tuesday_clear_btn">消す</button>
+
+                <!--/area-->
+            </div>
+
+            <div id="Wednesday" class="area1">
+                <textarea name="" id="training_diary_Wednesday" cols="50" rows="10">
+                    </textarea>
+                <button id="training_diary_Wednesday_save_btn">保存</button>
+                <button id="training_diary_Wednesday_clear_btn">消す</button>
+                <!--/area-->
+            </div>
+
+            <div id="Thursday" class="area1">
+                <textarea name="" id="training_diary_Thursday" cols="50" rows="10">
+                    </textarea>
+                <button id="training_diary_Thursday_save_btn">保存</button>
+                <button id="training_diary_Thursday_clear_btn">消す</button>
+                <!--/area-->
+            </div>
+
+            <div id="Friday" class="area1">
+                <textarea name="" id="training_diary_Friday" cols="50" rows="10">
+                    </textarea>
+                <button id="training_diary_Friday_save_btn">保存</button>
+                <button id="training_diary_Friday_clear_btn">消す</button>
+                <!--/area-->
+            </div>
+
+            <div id="Saturday" class="area1">
+                <textarea name="" id="training_diary_Saturday" cols="50" rows="10">
+                    </textarea>
+                <button id="training_diary_Saturday_save_btn">保存</button>
+                <button id="training_diary_Saturday_clear_btn">消す</button>
+                <!--/area-->
+            </div>
+
+            <div id="Sunday" class="area1">
+                <textarea name="" id="training_diary_Sunday" cols="50" rows="10">
+                    </textarea>
+                <button id="training_diary_Sunday_save_btn">保存</button>
+                <button id="training_diary_Sunday_clear_btn">消す</button>
+                <!--/area-->
+            </div>
+          <!--wrapper-->
+        </div>
+    
+    </div>
+
+<!-- ==========================
+タイマー
+=============================== -->
+    <div id="tool" class="area">
+        <div class="tool_in">
+            <div id="stop_watch">
+                <p>★ストップウォッチ</p>
+                <p id="timer">00:00:00</p>
+                <!-- 時間の表示 -->
+                <button id="timer_start_btn">スタート</button>
+
+                <button id="timer_stop_btn">ストップ</button>
+
+                <button id="timer_reset_btn">リセット</button>
+            </div>
+
+            <div id="countdown_timer">
+                <p>★カウントダウンタイマー</p>
+
+                <select name="" id="countdown_time_list" value=""></select>
+
+                <p id="countdown">00:00</p>
+                <!-- 時間の表示 -->
+                <button id="countdown_start_btn">スタート</button>
+
+                <button id="countdown_stop_btn">ストップ</button>
+
+                <button id="countdown_reset_btn">リセット</button>
+            </div>
+        <!-- tool_in -->
+        </div>
+    <!-- id="tool" class="area" -->
+    </div>
+
+<!-- =======================================
+link画面　リンクのアイコンを押したら、ホームページにとぶことができる。
+========================================= -->
+    <div id="link" class="area">
+    <div class="inner_area">
+         <div>
+            
+            <a href="https://www.instagram.com/anytime_yamaguchiyoshiki/" target="_blank"><img class="img_instagram"src="tool/Instagram_Glyph_White.png" alt="anytime"></a>
+                
+                <p>インスタグラム</p>
+        </div>
+
+
+        <div>
+            <a href="https://www.anytimefitness.co.jp/yamaguchi-yoshiki/" target="_blank"><img src="tool/black_dumbbell.png"alt="anytimefitness"></a>
+            <p>エニタイムフィットネス<br> 山口吉敷店HP</p>
+        </div>
+    </div>
+    </div>
+
+<!-- id="training" class="area" -->
+</div>
+
+
+<!--===============　
+    その他
+==================== -->
+
+<!-- <section id="history_area">
+    <h1>筋肉ポイント</h1>
+
+
+    <ul id="output"></ul>
+    <div class="history">
+
+        <p id="text1_set1">胸筋</p>
+        <p id="text1_set1">Xポイント</p>
+
+        <p id="text1_set1">背筋</p>
+        <p id="text1_set1">Xポイント</p>
+
+        <p id="text1_set1">脚</p>
+        <p id="text1_set1">Xポイント</p>
+
+        <p id="text1_set1">腕</p>
+        <p id="text1_set1">Xポイント</p>
+
+        <p id="text1_set1">肩</p>
+        <p id="text1_set1">Xポイント</p>
+
+    </div>
+
+</section> -->
+
+</main>
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script src="index.js"></script>
+
+<!-- <script src="firebase.js"></script> -->
+
+<script type="module">
+    // =====================================
+    // firebaseの設定
+    // ======================================
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDmQfVetVy7NcaNjmsZH1PEt-_JCANN0hU",
+        authDomain: "chat-app-13-7d906.firebaseapp.com",
+        databaseURL: "https://chat-app-13-7d906-default-rtdb.firebaseio.com",
+        projectId: "chat-app-13-7d906",
+        storageBucket: "chat-app-13-7d906.appspot.com",
+        messagingSenderId: "786543280934",
+        appId: "1:786543280934:web:6952d75556d5c175ef77e7"
+    };
+
+    import {
+            getFirestore,
+            collection,
+            addDoc,
+            serverTimestamp,
+            query,
+            orderBy,
+            onSnapshot,
+        } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // =========================
+    // 送信ボタンに対する処理
+    // =========================
+    $("#goal_text_save_btn").on("click", function () {
+        // 送信時に必要な処理
+        const postData = {
+            goalText: $("#goal_text").val(),
+            time: serverTimestamp(),
+        };
+
+        addDoc(collection(db, "muscle"), postData);
+    });
+
+    // ページの読み込み時にデータを取得
+    $(document).ready(function () {
+        // Firebaseからデータを取得
+        addDocs(collection(db, "muscle"))
+            .then((querySnapshot) => {
+                if (!querySnapshot.empty) {
+                    // 最新のデータを取得
+                    const latestData = querySnapshot.docs[querySnapshot.docs.length - 1].data();
+                    const goalText1 = latestData.goalText;
+
+                    // テキストエリアに表示
+                    $("#goal_text").val(goalText1);
+                } else {
+                    console.log("No data found.");
+                }
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        });
+
+
+   // =====================================
+    // データの取得処理　特にどこを鍛えたい？
+    // ======================================
+     $("#training_main_menu_save_btn").on("click", function () {
+            // 送信時に必要な処理
+            const postData = {
+                mainMenu: $("#training_main_menu_text").val(),
+                time: serverTimestamp(),
+            };
+
+            addDoc(collection(db, "muscleMenu"), postData);
+        });
+
+ // =====================================
+    // データ取得処理
+    // ======================================
+    const q = query(collection(db, "muscle"), orderBy("time", "desc"));
+
+    onSnapshot(collection(db, "muscle"), (querySnapshot) => {
+        console.log(querySnapshot.docs);
+        // 空の配列を準備．
+        // querySnapshot.docs に対して繰り返し処理を用いて各要素に対して，
+        // .id でドキュメント ID（名前）を取得する．
+        // .data() でドキュメント中身（3 項目）を取得する．
+        // 上記のデータのみを 1 で用意した配列に追加．
+        const documents = [];
+        querySnapshot.docs.forEach(function (doc) {
+            const document = {
+                id: doc.id,
+                data: doc.data(),
+            };
+            documents.push(document);
+        });
+
+        console.log(documents);
+    });
+
+
+
+        // ページの読み込み時にデータを取得
+        $(document).ready(function () {
+            // Firebaseからデータを取得
+            getDocs(collection(db, "muscleMenu"))
+                .then((querySnapshot) => {
+                    // 最新のデータを取得
+                    const latestData = querySnapshot.docs[querySnapshot.docs.length - 1].data();
+                    const goalText = latestData.goalText;
+
+                    // テキストエリアに表示
+                    $("#training_main_menu_text").val(goalText);
+                })
+                // 間違えがあった時の動き
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+        });
+
+
+   
+
+
+
+</script>
+
+</body>
+
+</html>
