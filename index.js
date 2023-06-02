@@ -80,26 +80,26 @@ if (localStorage.getItem("count")) {
 // カウンセリング 特にどこを鍛えたい？
 // ======================================
 // 決定ボタンを押した時の値の獲得
-$("#training_main_menu_save_btn").on("click", function () {
-    const mainMenu = $("#training_main_menu_text").val();
+// $("#training_main_menu_save_btn").on("click", function () {
+//     const mainMenu = $("#training_main_menu_text").val();
 
-    const json3 = JSON.stringify(mainMenu);//JSONで互換性を設定
+//     const json3 = JSON.stringify(mainMenu);//JSONで互換性を設定
     
-     console.log(json3);
-    localStorage.setItem("mainMenu", json3);
+//      console.log(json3);
+//     localStorage.setItem("mainMenu", json3);
 
-});
-// ------------------------------------------
-// リロード後もlocalstorageから値を取得して表示する
-if (localStorage.getItem("mainMenu")) {
-    const json3 = localStorage.getItem("mainMenu");
-    console.log(json3);
+// });
+// // ------------------------------------------
+// // リロード後もlocalstorageから値を取得して表示する
+// if (localStorage.getItem("mainMenu")) {
+//     const json3 = localStorage.getItem("mainMenu");
+//     console.log(json3);
 
-    const mainMenu = JSON.parse(json3);
-    console.log(mainMenu);
+//     const mainMenu = JSON.parse(json3);
+//     console.log(mainMenu);
 
-    $("#training_main_menu_text").text(mainMenu);
-    };
+//     $("#training_main_menu_text").text(mainMenu);
+//     };
 
 
 // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -590,10 +590,10 @@ function GethashID (hashIDName){
   if(hashIDName){
     //タブ設定
     $('.tab li').find('a').each(function() { //タブ内のaタグ全てを取得
-     var idName = $(this).attr('href'); //タブ内のaタグのリンク名（例）#lunchの値を取得 
+     var idName = $(this).attr('href'); //タブ内のaタグのリンク名（例）#lunchの値を取得
 
       if(idName == hashIDName){ //リンク元の指定されたURLのハッシュタグ（例）http://example.com/#lunch←この#の値とタブ内のリンク名（例）#lunchが同じかをチェック
-        var parentElm = $(this).parent(); //タブ内のaタグの親要素（li）を取得
+        let parentElm = $(this).parent(); //タブ内のaタグの親要素（li）を取得
         $('.tab li').removeClass("active"); //タブ内のliについているactiveクラスを取り除き
         $(parentElm).addClass("active"); //リンク元の指定されたURLのハッシュタグとタブ内のリンク名が同じであれば、liにactiveクラスを追加
         //表示させるエリア設定
@@ -606,7 +606,7 @@ function GethashID (hashIDName){
 }
 //タブをクリックしたら
 $('.tab a').on('click', function() {
-  var idName = $(this).attr('href'); //タブ内のリンク名を取得  
+  let idName = $(this).attr('href'); //タブ内のリンク名を取得
   GethashID (idName);//設定したタブの読み込みと
   return false;//aタグを無効にする
 });

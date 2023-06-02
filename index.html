@@ -15,7 +15,7 @@
 ======================================-->
 <div class="top"  id="">
    <h1>ALL for MUSCLE</h1>
-   <h3>~すべては筋力トレーニングのために〜</h3>
+   <h3>~筋トレに心臓を捧げよ〜</h3>
 </div>
 
 <div class="wrapper">
@@ -287,132 +287,205 @@ link画面　リンクのアイコンを押したら、ホームページにと�
 <script src="index.js"></script>
 
 <!-- <script src="firebase.js"></script> -->
-
 <script type="module">
-    // =====================================
-    // firebaseの設定
-    // ======================================
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+// =====================================
+// firebaseの設定
+// ======================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 
-    const firebaseConfig = {
-        apiKey:
-        authDomain: "chat-app-13-7d906.firebaseapp.com",
-        databaseURL: "https://chat-app-13-7d906-default-rtdb.firebaseio.com",
-        projectId: "chat-app-13-7d906",
-        storageBucket: "chat-app-13-7d906.appspot.com",
-        messagingSenderId: "786543280934",
-        appId: "1:786543280934:web:6952d75556d5c175ef77e7"
+const firebaseConfig = {
+// =======================================
+// GitHubに送信するときは消して！！！！！！！！！！！！！！！！！！！！！！
+  
+    // ===================================
+    authDomain: "chat-app-13-7d906.firebaseapp.com",
+    databaseURL: "https://chat-app-13-7d906-default-rtdb.firebaseio.com",
+    projectId: "chat-app-13-7d906",
+    storageBucket: "chat-app-13-7d906.appspot.com",
+    messagingSenderId: "786543280934",
+    appId: "1:786543280934:web:6952d75556d5c175ef77e7"
+};
+
+import {
+        getFirestore,
+        collection,
+        addDoc,
+        serverTimestamp,
+        query,
+        orderBy,
+        onSnapshot,
+        doc,
+        getDoc,
+        limit,
+
+    } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// =========================
+// 送信ボタンに対する処理   
+// トレーニングのめあて
+// =========================
+$("#goal_text_save_btn").on("click", function () {
+    // -------------------------------
+    // データの送信
+    const postData1 = {
+        goalText: $("#goal_text").val(),
+        time: serverTimestamp(),
     };
 
-    import {
-            getFirestore,
-            collection,
-            addDoc,
-            serverTimestamp,
-            query,
-            orderBy,
-            onSnapshot,
-        } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+    addDoc(collection(db, "muscle1"), postData1);
+});
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+// --------------------------------
+// データを取得する処理
+const q = query(collection(db, "muscle1"),orderBy("time", "desc"), limit(1));
 
-    // =========================
-    // 送信ボタンに対する処理
-    // =========================
-    $("#goal_text_save_btn").on("click", function () {
-        // 送信時に必要な処理
-        const postData = {
-            goalText: $("#goal_text").val(),
-            time: serverTimestamp(),
-        };
+let initialLoad = true;
+onSnapshot(q, (querySnapshot) => {
+    if (initialLoad) {
+        initialLoad = false;
+        if (!querySnapshot.empty) {
+            const latestData = querySnapshot.docs[0].data();
+            const goalText = latestData.goalText;
+            $("#goal_text").val(goalText);
+        }
+    }
+});
 
-        addDoc(collection(db, "muscle"), postData);
+// =================================
+// 特にどこを鍛えたい？
+// データ送信と取得表示
+// =================================
+$("#training_main_menu_save_btn").on("click", function () {
+    // -------------------------------
+    // データの送信
+    const postData2 = {
+        mainName: $("#training_main_menu_text").val(),
+        time: serverTimestamp(),
+    };
+
+    addDoc(collection(db, "mainMenu"), postData2);
     });
 
-    // ページの読み込み時にデータを取得
-    $(document).ready(function () {
-        // Firebaseからデータを取得
-        addDocs(collection(db, "muscle"))
-            .then((querySnapshot) => {
-                if (!querySnapshot.empty) {
-                    // 最新のデータを取得
-                    const latestData = querySnapshot.docs[querySnapshot.docs.length - 1].data();
-                    const goalText1 = latestData.goalText;
+// --------------------------------
+// データを取得する処理
+const q2 = query(collection(db, "mainMenu"), orderBy("time", "desc"), limit(1));
 
-                    // テキストエリアに表示
-                    $("#goal_text").val(goalText1);
-                } else {
-                    console.log("No data found.");
-                }
-            })
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-        });
-
-
-   // =====================================
-    // データの取得処理　特にどこを鍛えたい？
-    // ======================================
-     $("#training_main_menu_save_btn").on("click", function () {
-            // 送信時に必要な処理
-            const postData = {
-                mainMenu: $("#training_main_menu_text").val(),
-                time: serverTimestamp(),
-            };
-
-            addDoc(collection(db, "muscleMenu"), postData);
-        });
-
- // =====================================
-    // データ取得処理
-    // ======================================
-    const q = query(collection(db, "muscle"), orderBy("time", "desc"));
-
-    onSnapshot(collection(db, "muscle"), (querySnapshot) => {
-        console.log(querySnapshot.docs);
-        // 空の配列を準備．
-        // querySnapshot.docs に対して繰り返し処理を用いて各要素に対して，
-        // .id でドキュメント ID（名前）を取得する．
-        // .data() でドキュメント中身（3 項目）を取得する．
-        // 上記のデータのみを 1 で用意した配列に追加．
-        const documents = [];
-        querySnapshot.docs.forEach(function (doc) {
-            const document = {
-                id: doc.id,
-                data: doc.data(),
-            };
-            documents.push(document);
-        });
-
-        console.log(documents);
-    });
+let initialLoad2 = true;
+onSnapshot(q2, (querySnapshot2) => {
+    if (initialLoad2) {
+        initialLoad2 = false;
+        if (!querySnapshot2.empty) {
+            const latestData2 = querySnapshot2.docs[0].data();
+            const mainName = latestData2.mainName;
+            $("#training_main_menu_text").val(mainName);
+        }
+    }
+});
+// --------------------------------
 
 
 
-        // ページの読み込み時にデータを取得
-        $(document).ready(function () {
-            // Firebaseからデータを取得
-            getDocs(collection(db, "muscleMenu"))
-                .then((querySnapshot) => {
-                    // 最新のデータを取得
-                    const latestData = querySnapshot.docs[querySnapshot.docs.length - 1].data();
-                    const goalText = latestData.goalText;
+//    htmlElements.push(`
+// <li id="${document.id}">
+//     <p>${document.data.name} at ${document.data.time}</p>
+//     <p>${document.data.text}</p></li>`);
 
-                    // テキストエリアに表示
-                    $("#training_main_menu_text").val(goalText);
-                })
-                // 間違えがあった時の動き
-                .catch((error) => {
-                    console.log("Error getting documents: ", error);
-                });
-        });
+// const docRef1 = doc(db, "muscle1", "goalText");
+// const docSnap1 = await getDoc(docRef1);
+
+// const latestData1 = querySnapshot.docs[querySnapshot.docs.length - 1].data();
+// console.log(latestData1);
+
+// const goalText = latestData1.goalText;
+
+// if (docSnap1.exists()) {
+// console.log("Document data:", docSnap1.data());
+//     // テキストエリアに表示
+//     $("goal_text").val(goalText);
+
+// } else {
+//     // データがない、エラー
+//     console.log("No such document!");
+// };
+
+//     // ページの読み込み時にデータを取得
+//     $(document).ready(function () {
+//          const querySnapshot =   getDocs(collection(db, "muscle1"));
+//         // Firebaseからデータを取得
+//         getDocs(collection(db, "muscle1"))
+//             .then((querySnapshot) => {
+//                 // 最新のデータを取得
+//                 const latestData1 = querySnapshot.docs[querySnapshot.docs.length - 1].data();
+//                 const goalText = latestData1.goalText;
+
+//                 // テキストエリアに表示
+//                 $("goal_text").val(goalText);
+//             })
+//             // 間違えがあった時の動き
+//             .catch((error) => {
+//                 console.log("Error getting documents: ", error);
+//             });
+//     });
 
 
-   
+//    // =====================================
+//     // データの送る処理    特にどこを鍛えたい？
+//     // ======================================
+//      $("#training_main_menu_save_btn").on("click", function () {
+//             // 送信時に必要な処理
+//             const postData2 = {
+//                 mainMenu1: $("#training_main_menu_text").val(),
+//                 time: serverTimestamp(),
+//             };
 
+//             addDoc(collection(db, "muscleMenu"), postData2);
+//         });
 
+// // =====================================
+// // データ取得処理
+// // ====================================
+//     const q = query(collection(db, "muscleMenu"));
+
+//     onSnapshot(collection(db, "muscle"), (querySnapshot) => {
+//         console.log(querySnapshot.docs);
+//         // 空の配列を準備．
+//         // querySnapshot.docs に対して繰り返し処理を用いて各要素に対して，
+//         // .id でドキュメント ID（名前）を取得する．
+//         // .data() でドキュメント中身（3 項目）を取得する．
+//         // 上記のデータのみを 1 で用意した配列に追加．
+//         const documents = [];
+//         querySnapshot.docs.forEach(function (doc) {
+//             const document = {
+//                 id: doc.id,
+//                 data: doc.data(),
+//             };
+//             documents.push(document);
+//         });
+
+//         console.log(documents);
+//     });
+
+//     // --------------------------------------------
+//     // ページの読み込み時にデータを取得
+//         $(document).ready(function () {
+//             // Firebaseからデータを取得
+//             getDocs(collection(db, "muscleMenu"))
+//                 .then((querySnapshot) => {
+//                     // 最新のデータを取得
+//                     const latestData = querySnapshot.docs[querySnapshot.docs.length - 1].data();
+//                     const goalText = latestData.goalText;
+
+//                     // テキストエリアに表示
+//                     $("#training_main_menu_text").val(goalText);
+//                 })
+//                 // 間違えがあった時の動き
+//                 .catch((error) => {
+//                     console.log("Error getting documents: ", error);
+//                 });
+//         });
 
 </script>
 
