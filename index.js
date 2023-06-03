@@ -189,36 +189,35 @@ $('#timer_reset_btn').on('click', function() {
 // ----------------------------------
 // トレーニングのインターバル用のタイマー カウントダウン
 // --------------------------------
-  let endTime;
+let endTime;
 let intervalId;
+let myMinutes;
 
 for (let i = 0; i < 10; i++) {
     $("#countdown_time_list").append(`<option value="${i}">${i}分</option>`)
 };
-
-$('#countdown_time_list').on('input', function() {
+// タイマーに入れる時間を設定する
+// その際dロップダウンリストから選択する
+$('#countdown_time_list').on('input', function () {
     let myMinutes = $(this).val();
-  });
-  function check() {
+    console.log(myMinutes);
+});
+  
+function check() {
     let countdown = endTime - new Date().getTime();
-   
     if (countdown < 0) {
-      clearInterval(intervalId);
-      countdown = myMinutes * 60 *  1000;
+        clearInterval(intervalId);
+        countdown = myMinutes * 60 *  1000;
     }
     const totalSeconds = Math.floor(countdown / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-      $("#countdown").text(`${minutes}:${seconds}`);
+    $("#countdown").text(`${minutes}:${seconds}`);
 };
-
-
-// タイマーに入れる時間を設定する
-// その際dロップダウンリストから選択する
-
-
+// -----------------------------
+// カウントダウンのスタート
 $("#countdown_start_btn").on("click", function () {
-myMinutes = $("#countdown_time_list").val();
+    myMinutes = $("#countdown_time_list").val();
     // ①終了時刻を求める。
     endTime = new Date().getTime() + myMinutes * 60 *1000
 ;
@@ -228,9 +227,17 @@ myMinutes = $("#countdown_time_list").val();
     intervalId = setInterval(check, 100);
     //100ミリ秒ごとにcheck関数の起動
 })
+
+// カウントダウンのストップ
 $("#countdown_stop_btn").on("click", function () {
-  clearInterval(endTime);
-})
+    clearInterval(intervalId);
+});
+
+//リセットボタン　初期値に戻す
+$("#countdown_reset_btn").on("click", function () {
+    clearInterval(intervalId);
+    $("#countdown").text("0:00");
+});
 
 // ===================================
 // トレーニングの記録メニュー回数重さ
@@ -247,11 +254,11 @@ function trainingLog() {
         $(".training_menu_set_count").append(`<option value="${i}セット目">${i}セット目</option>`);
     };
 
-
+// -----------------------------------------------------
+// セットが入力された時の動き
     $("#training_menu_set_count").change(function () {
-        let x = $('option:selected').val();
+        $('option:selected').val();
     });
-
 
     for (let i = 5; i <= 150; i = i+5) {
         $(".training_menu_kg_count").append(`<option value="${i}kg">${i}kg</option>`);
@@ -275,17 +282,20 @@ $("#finish_btn").on("click", function () {
     $("#record1").hide();
 });
 
+
+
+
 // -----------------------------------------------------
 // 記録するボタンの動き
 let number = 1;
 $("#log_btn").on("click", function () {
 
-    let a = $()
-
     const name = $("#input_menu_name").val();
-    const set = $("#input_menu_set_count").val();
+    let set = $("#training_menu_set_count").val();
     const kg = $("#input_menu_kg_count").val();
     const rep = $("#input_menu_rep_count").val();
+
+    console.log(set);
 
     const data = {
         name: name,
@@ -297,7 +307,6 @@ $("#log_btn").on("click", function () {
  for (let i = 1; i <= number; i++) {
         $("#input_text").append(`<p id="text${i}"></p>`);
     };
-    
 
     $("#text" + number).text((data.name)+" " + (data.set)+" " + (data.kg)+" " + (data.rep));
 
@@ -307,7 +316,6 @@ $("#log_btn").on("click", function () {
     localStorage.setItem("log"+number, json);
 
     number++;
-
  });
 // // -------------------------------------------------------------
 // localStorageに保存されたデータをテキストエリアに表示
@@ -320,7 +328,6 @@ if (localStorage.getItem("log" + number)) {
     const data = JSON.parse(json);
     console.log(data);
 
-    
     $("#text" + number).text((data.name) + " " + (data.set) + " " + (data.kg) + " " + (data.rep));
     }
 };
@@ -331,8 +338,6 @@ if (localStorage.getItem("log" + number)) {
 //     $('#output_menu_name').text($(this).val());
 //   });
 // });
-
-console.log();
 // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝==============
 // トレーニング日誌
 // ローカルストレージに保存したものをブラウザに表示させるのが基本の流れ

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <!-- Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css">
+
+    <title>ALL for MUSCLE  ログイン</title>
+</head>
+
+<body>
+    <main>
+        <div>
+            <h1>Welcome to App</h1>
+            <div id="firebaseui-auth-container"></div>
+            <div id="loader">Loading...</div>
+        </div>
+            <button id="login_btn">login</button>
+    </main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script type="module">
+// 必要なFirebaseライブラリを読み込み
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+// Firebase configuration KEYを取得して設定
+const firebaseConfig = {
+
+    apiKey:"AIzaSyDmQfVetVy7NcaNjmsZH1PEt-_JCANN0hU",
+    authDomain: "chat-app-13-7d906.firebaseapp.com",
+    databaseURL: "https://chat-app-13-7d906-default-rtdb.firebaseio.com",
+    projectId: "chat-app-13-7d906",
+    storageBucket: "chat-app-13-7d906.appspot.com",
+    messagingSenderId: "786543280934",
+    appId: "1:786543280934:web:6952d75556d5c175ef77e7"
+};
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+//GoogleAuth認証用
+const provider = new GoogleAuthProvider();
+provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+const auth = getAuth();
+
+
+// //ログインボタンの動き　ページを開いた時点での動き//
+// $(document).ready(function () {
+//     $("#login").addClass("bob");
+// });
+
+//ログイン処理//
+$("#login").on("click", function () {
+    //Google認証完了後の処理
+    signInWithPopup(auth, provider).
+    then((result) => {
+        //ログイン後のページ遷移先（次のページ）
+        location.href = "index.html";
+    }).catch((error) => {
+        //エラー処理
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        //使用されているユーザーアカウントのメール
+        const email = error.email;
+        //使用された認証タイプ
+        const credential = GoogleAuthProvider.credentialFromError(error);
+    });
+});
+</script>
+
+</body>

@@ -5,14 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+<!-- Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css">
+
     <title>ALL for MUSCLE</title>
 </head>
 <body>
-
 <main>
-<!-- ========================================
+<!-- =============================
 タイトル画面
-======================================-->
+===============================-->
 <div class="top"  id="">
    <h1>ALL for MUSCLE</h1>
    <h3>~筋トレに心臓を捧げよ〜</h3>
@@ -29,90 +32,84 @@
 <!-- ==============================================
 カウンセリング画面
 ==================================================== -->
-    <div id="home" class="area">
-        <div class="tool_in">
-            <div>
-                <p>トレーニングのめあて</p>
-                <textarea name="" id="goal_text" cols="30" rows="1"></textarea>
-                <button id="goal_text_save_btn">決定</button>
-            </div>
-
-            <div>
-                <p>週に何回ジムでトレーニングに行く？</p>
-                <textarea name="" id="count_week_gym_text" cols="5" rows="1" value=""></textarea>
-                <select name="" id="count_week_gym_list" value="">
-                </select>
-
-                <button id="count_week_gym_save_btn">決定</button>
-                <button id="count_week_gym_change_btn">変更</button>
-            </div>
-
-            <div>
-                <p>特にどこを鍛えたい？</p>
-                <textarea name="" id="training_main_menu_text" cols="30" rows="1"></textarea>
-                <button id="training_main_menu_save_btn">決定</button>
-            </div>
-        <!-- inner_area -->
+<div id="home" class="area">
+    <div class="tool_in">
+        <div>
+            <p>トレーニングのめあて</p>
+            <textarea name="" id="goal_text" cols="30" rows="1"></textarea>
+            <button id="goal_text_save_btn">決定</button>
         </div>
+
+        <div>
+            <p>週に何回ジムでトレーニングに行く？</p>
+            <textarea name="" id="count_week_gym_text" cols="5" rows="1" value=""></textarea>
+            <select name="" id="count_week_gym_list" value="">
+            </select>
+
+            <button id="count_week_gym_save_btn">決定</button>
+            <button id="count_week_gym_change_btn">変更</button>
+        </div>
+
+        <div>
+            <p>特にどこを鍛えたい？</p>
+            <textarea name="" id="training_main_menu_text" cols="30" rows="1"></textarea>
+            <button id="training_main_menu_save_btn">決定</button>
+        </div>
+    <!-- inner_area -->
     </div>
-
-
+</div>
 <!-- ===========================================
 トレーニングの記録　
 ================================================ -->
-    <div id="training" class="area">
-        <div class="inner_area">
-            <p>======トレーニングの記録========</p>
-            <div>
-                <input id="date" type="date" list="date">
-                のトレーニング
-                <button id="date_input_btn">始めるよ</button>
-            </div>
-        <!-- ------------------------------------------
-        トレーニンングの記録画面＿＿何を何回行ったか
-        -------------------------------------------------->
-            <section class="record" id="record1">
-       
-                <p>===トレーニングメニューを記録していこう===</p>
-                <div class="training">
-                    <div class="training_menu" id="training_menu1">
-                    <!-- トレーニングの種目の記録 -->
-        
-                    <input type="text" id="input_menu_name" list="training_menu_name" placeholder="種目">
-                    <datalist class="training_menu_name" id="training_menu_name"></datalist>
-        
-                    <!-- トレーニングのセット数の記録 -->
-                    <!-- <input type="text" id="input_menu_set_count" list="training_menu_set_count" placeholder="1セット"> -->
-                    <select class="training_menu_set_count" id="training_menu_set_count"></select>
-        
-                    <!-- トレーニングの負荷の重さ -->
-                    <input type="text" id="input_menu_kg_count" list="training_menu_kg_count" placeholder="50kg">
-                    <datalist class="training_menu_kg_count" id="training_menu_kg_count" value=""></datalist>
-        
-                    <!-- トレーニングの１セットあたりの回数 -->
-                    <input type="text" id="input_menu_rep_count" list="training_menu_rep_count" placeholder="10rep">
-                    <datalist class="training_menu_rep_count" id="training_menu_rep_count" value=""></datalist>
-                <!-- class="training"> -->
-                </div>
-
-                <div>
-                    <button id="log_btn">記録する</button>
-                    <button id="finish_btn">トレーニング終了</button>
-                </div>
-
-            <!-- class="record" id="record1" -->
-            </section>
-        
-                <div id="input_text">
-                    <p id="input_date"></p>
-                </div>
-        <!-- <div class="tool_in">-->
+<div id="training" class="area">
+    <div class="inner_area">
+        <p>======トレーニングの記録========</p>
+        <div>
+            <input id="date" type="date" list="date">
+            のトレーニング
+            <button id="date_input_btn">始めるよ</button>
         </div>
-    <!-- id="training" class="area" -->
-    </div>
-
-
+    <!-- ------------------------------------------
+    トレーニンングの記録画面＿＿何を何回行ったか
+    -------------------------------------------------->
+        <section class="record" id="record1">
     
+            <p>===トレーニングメニューを記録していこう===</p>
+            <div class="training">
+                <div class="training_menu" id="training_menu1">
+                <!-- トレーニングの種目の記録 -->
+                <input type="text" id="input_menu_name" list="training_menu_name" placeholder="種目">
+                <datalist class="training_menu_name" id="training_menu_name"></datalist>
+    
+                <!-- トレーニングのセット数の記録 -->
+                <!-- <input type="text" id="input_menu_set_count" list="training_menu_set_count" placeholder="1セット"> -->
+                <select class="training_menu_set_count" id="training_menu_set_count"></select>
+    
+                <!-- トレーニングの負荷の重さ -->
+                <input type="text" id="input_menu_kg_count" list="training_menu_kg_count" placeholder="50kg">
+                <datalist class="training_menu_kg_count" id="training_menu_kg_count" value=""></datalist>
+    
+                <!-- トレーニングの１セットあたりの回数 -->
+                <input type="text" id="input_menu_rep_count" list="training_menu_rep_count" placeholder="10rep">
+                <datalist class="training_menu_rep_count" id="training_menu_rep_count" value=""></datalist>
+            <!-- class="training"> -->
+            </div>
+
+            <div>
+                <button id="log_btn">記録する</button>
+                <button id="finish_btn">トレーニング終了</button>
+            </div>
+
+        <!-- class="record" id="record1" -->
+        </section>
+    
+            <div id="input_text">
+                <p id="input_date"></p>
+            </div>
+    <!-- <div class="tool_in">-->
+    </div>
+<!-- id="training" class="area" -->
+</div>
 <!-- =================================== -->
 <!-- トレーニンングの日誌 -->
 <!-- =================================== -->
@@ -121,13 +118,13 @@
         <div class="wrapper1">
             <!-- tabタブの設定  -->
             <ul class="tab1">
-                <li><a href="#Monday">月</a></li>
-                <li><a href="#Tuesday">火</a></li>
-                <li><a href="#Wednesday">水</a></li>
-                <li><a href="#Thursday">木</a></li>
-                <li><a href="#Friday">金</a></li>
-                <li><a href="#Saturday">土</a></li>
-                <li><a href="#Sunday">日</a></li>
+                <li><a href="#Monday">記録①</a></li>
+                <li><a href="#Tuesday">記録②</a></li>
+                <li><a href="#Wednesday">記録③</a></li>
+                <li><a href="#Thursday">記録④</a></li>
+                <li><a href="#Friday">記録⑤</a></li>
+                <!-- <li><a href="#Saturday">記録⑥</a></li>
+                <li><a href="#Sunday">記録⑦</a></li> -->
             </ul>
 
             <div id="Monday" class="area1">
@@ -253,45 +250,28 @@ link画面　リンクのアイコンを押したら、ホームページにと�
     その他
 ==================== -->
 
-<!-- <section id="history_area">
-    <h1>筋肉ポイント</h1>
-
-
-    <ul id="output"></ul>
-    <div class="history">
-
-        <p id="text1_set1">胸筋</p>
-        <p id="text1_set1">Xポイント</p>
-
-        <p id="text1_set1">背筋</p>
-        <p id="text1_set1">Xポイント</p>
-
-        <p id="text1_set1">脚</p>
-        <p id="text1_set1">Xポイント</p>
-
-        <p id="text1_set1">腕</p>
-        <p id="text1_set1">Xポイント</p>
-
-        <p id="text1_set1">肩</p>
-        <p id="text1_set1">Xポイント</p>
-
-    </div>
-
-</section> -->
-
+<div id="calendar"></div>
+<div id="diary-form">
+    <h2>日記入力</h2>
+    <input type="date" id="diary-date">
+    <textarea id="diary-content" rows="5"></textarea>
+    <button id="save-diary-btn">保存</button>
+</div>
 </main>
-
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script src="index.js"></script>
 
-<!-- <script src="firebase.js"></script> -->
+<script src="firebase.js"></script>
+
 <script type="module">
 // =====================================
 // firebaseの設定
 // ======================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+
+import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js'
 
 const firebaseConfig = {
 // =======================================
@@ -317,14 +297,15 @@ import {
         doc,
         getDoc,
         limit,
-
     } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+
+
 // =========================
-// 送信ボタンに対する処理   
+// 送信ボタンに対する処理
 // トレーニングのめあて
 // =========================
 $("#goal_text_save_btn").on("click", function () {
@@ -486,8 +467,9 @@ onSnapshot(q2, (querySnapshot2) => {
 //                     console.log("Error getting documents: ", error);
 //                 });
 //         });
-
 </script>
+
+
 
 </body>
 
